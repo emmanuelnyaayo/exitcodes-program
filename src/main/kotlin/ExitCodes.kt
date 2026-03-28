@@ -3,7 +3,7 @@
 // Exit code = 1 (An exception occurred)
 // Exit code = 0 (Program finished execution successfully)
 
-var exitValue = 0
+var exitCode = 0
 
 //ForLoop Function
 fun forLoop() {
@@ -36,7 +36,7 @@ fun forLoop() {
 fun whileLoop(exitValue: Int) {
     println()
     println("WHILE LOOP....")
-    var exitCode = exitValue
+    exitCode = exitValue
 
     while (exitCode > 0) {
         exitCode--
@@ -69,7 +69,7 @@ fun whileLoop(exitValue: Int) {
 fun doWhileLoop(exitValue: Int) {
     println()
     println("DO...WHILE LOOP....")
-    var exitCode = exitValue
+    exitCode = exitValue
 
     do {
         exitCode--
