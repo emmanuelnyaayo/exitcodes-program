@@ -3,8 +3,10 @@
 // Exit code = 1 (An exception occurred)
 // Exit code = 0 (Program finished execution successfully)
 
-fun main() {
+var exitValue = 0
 
+//ForLoop Function
+fun forLoop() {
     println("FOR LOOP....")
     for (i in 130 downTo 0) {
         if (i == 130) {
@@ -28,10 +30,13 @@ fun main() {
         println("exit code = $i")
 
     }
+}
 
+//WhileLoop Function
+fun whileLoop(exitValue: Int) {
     println()
     println("WHILE LOOP....")
-    var exitCode = 131
+    var exitCode = exitValue
 
     while (exitCode > 0) {
         exitCode--
@@ -58,10 +63,13 @@ fun main() {
         println("exit code = $exitCode")
 
     }
+}
 
+//DoWhileLoop Function
+fun doWhileLoop(exitValue: Int) {
     println()
     println("DO...WHILE LOOP....")
-    exitCode = 131
+    var exitCode = exitValue
 
     do {
         exitCode--
@@ -88,5 +96,14 @@ fun main() {
         println("exit code = $exitCode")
 
     } while (exitCode > 0)
+}
+
+fun main() {
+    //Function calls
+    forLoop()
+
+    whileLoop(exitValue = 131)
+
+    doWhileLoop(exitValue = 131)
 
 }
