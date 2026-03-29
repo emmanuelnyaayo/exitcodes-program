@@ -3,107 +3,75 @@
 // Exit code = 1 (An exception occurred)
 // Exit code = 0 (Program finished execution successfully)
 
-var exitCode = 0
+fun getExitMessage(code: Int): String? {
+    return when (code) {
+        130 -> "An infinite loop has occurred.."
+        2 -> "A minor warning.."
+        1 -> "An exception has occurred.."
+        0 -> "The program has finished successfully.."
+        else -> null
+    }
+}
+
+fun collectKnownExitCode(code: Int, results: MutableList<Pair<Int, String>>) {
+    val message = getExitMessage(code)
+    if (message != null) {
+        results.add(code to message)
+    }
+}
 
 //ForLoop Function
-fun forLoop() {
-    println("FOR LOOP....")
+fun forLoop(): List<Pair<Int, String>> {
+    val results = mutableListOf<Pair<Int, String>>()
+
     for (i in 130 downTo 0) {
-        if (i == 130) {
-            println("An infinite loop has occurred...")
-//            break
-        }
-        if (i in 2..129) {
-            continue
-        }
-
-        if (i == 1) {
-            println("An exception has occurred..")
-//            break
-        }
-
-        if (i == 0) {
-            println("The program has finished successfully..")
-//            break
-        }
-
-        println("exit code = $i")
-
+        collectKnownExitCode(i, results)
     }
+
+    return results
 }
 
 //WhileLoop Function
-fun whileLoop(exitValue: Int) {
-    println()
-    println("WHILE LOOP....")
-    exitCode = exitValue
+fun whileLoop(exitCode: Int): List<Pair<Int, String>> {
+    val results = mutableListOf<Pair<Int, String>>()
+    var code = exitCode
 
-    while (exitCode > 0) {
-        exitCode--
+    while (code > 0) {
+        code--
 
-        if (exitCode == 130) {
-            println("An infinite loop occurred...")
-//            break
-        }
-
-        if (exitCode in 2..129) {
-            continue
-        }
-
-        if (exitCode == 1) {
-            println("An exception has occurred..")
-//            break
-        }
-
-        if (exitCode == 0) {
-            println("The program has finished successfully..")
-//            break
-        }
-
-        println("exit code = $exitCode")
-
+        collectKnownExitCode(code, results)
     }
+
+    return results
 }
 
 //DoWhileLoop Function
-fun doWhileLoop(exitValue: Int) {
-    println()
-    println("DO...WHILE LOOP....")
-    exitCode = exitValue
+fun doWhileLoop(exitCode: Int): List<Pair<Int, String>> {
+    val results = mutableListOf<Pair<Int, String>>()
+    var code = exitCode
 
     do {
-        exitCode--
+        code--
 
-        if (exitCode == 130) {
-            println("An infinite loop occurred...")
-//            break
-        }
+        collectKnownExitCode(code, results)
 
-        if (exitCode in 2..129) {
-            continue
-        }
+    } while (code > 0)
 
-        if (exitCode == 1) {
-            println("An exception has occurred..")
-//            break
-        }
+    return results
+}
 
-        if (exitCode == 0) {
-            println("The program has finished successfully..")
-//            break
-        }
-
-        println("exit code = $exitCode")
-
-    } while (exitCode > 0)
+fun printResults(title: String, results: List<Pair<Int, String>>) {
+    println("\n$title")
+    for ((code, message) in results) {
+        println(message)
+        println("exit code = $code")
+    }
 }
 
 fun main() {
-    //Function calls
-    forLoop()
-
-    whileLoop(exitValue = 131)
-
-    doWhileLoop(exitValue = 131)
+    //Calling Printing Function
+    printResults(title = "FOR LOOP ....", results = forLoop())
+    printResults(title = "WHILE LOOP ....", results = whileLoop(exitCode = 131))
+    printResults(title = "DO..WHILE LOOP ....", results = doWhileLoop(exitCode = 131))
 
 }
